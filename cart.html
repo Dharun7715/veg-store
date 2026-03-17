@@ -2,48 +2,21 @@
 <html>
 <head>
     <title>Cart</title>
-    <style>
-        body {
-            font-family: Arial;
-            text-align: center;
-            background-color: #f0f3f0;
-        }
-
-        .item {
-            background: white;
-            margin: 10px;
-            padding: 10px;
-            border-radius: 10px;
-        }
-
-        button {
-            background: red;
-            color: white;
-            border: none;
-            padding: 5px 10px;
-            border-radius: 5px;
-        }
-    </style>
 </head>
+<body style="text-align:center; font-family:Arial;">
 
-<body>
+<h2>🛒 Your Cart</h2>
 
-<h1>🛒 Your Cart</h1>
+<a href="/home">Back to Shop</a>
 
-{% for item in cart %}
-<div class="item">
-    {{ item }}
-    <a href="/remove/{{ item }}">
-        <button>Remove</button>
-    </a>
-</div>
-{% endfor %}
-
-<br>
-
-<a href="/">
-    <button style="background:green;">Back to Shop</button>
-</a>
+<ul>
+    {% for item in cart %}
+        <li>
+            {{ item }}
+            <a href="/remove/{{ item }}">Remove</a>
+        </li>
+    {% endfor %}
+</ul>
 
 </body>
 </html>
