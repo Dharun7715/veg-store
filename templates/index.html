@@ -2,104 +2,20 @@
 <html>
 <head>
     <title>Veg Store</title>
-    <style>
-        body {
-            font-family: Arial;
-            background-color: #e8f5e9;
-            text-align: center;
-        }
-
-        .container {
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
-
-        .card {
-            background: white;
-            padding: 15px;
-            margin: 15px;
-            border-radius: 15px;
-            width: 150px;
-            box-shadow: 0 0 10px gray;
-        }
-
-        button {
-            padding: 5px 10px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-
-        .add-btn {
-            background: green;
-            color: white;
-        }
-
-        .remove-btn {
-            background: red;
-            color: white;
-        }
-    </style>
 </head>
-<body>
+<body style="text-align:center; font-family:Arial;">
 
-{% if not logged_in %}
+<h1>🥕 Veg Store</h1>
 
-    <h1>🔐 Login</h1>
+<a href="/cart">🛒 Go to Cart</a>
 
-    <form method="POST">
-        <input type="text" name="username" placeholder="Username"><br><br>
-        <input type="password" name="password" placeholder="Password"><br><br>
-        <button type="submit">Login</button>
-    </form>
+<h3>Products</h3>
 
-{% else %}
-
-    <h1>🥕 Fresh Fruits & Vegetables</h1>
-    <a href="/logout"><button>Logout</button></a>
-
-    <div class="container">
-        <div class="card">
-            <h3>🍅 Tomato</h3>
-            <p>₹20</p>
-            <a href="/add/Tomato"><button class="add-btn">Add</button></a>
-        </div>
-
-        <div class="card">
-            <h3>🥔 Potato</h3>
-            <p>₹30</p>
-            <a href="/add/Potato"><button class="add-btn">Add</button></a>
-        </div>
-
-        <div class="card">
-            <h3>🥕 Carrot</h3>
-            <p>₹40</p>
-            <a href="/add/Carrot"><button class="add-btn">Add</button></a>
-        </div>
-
-        <div class="card">
-            <h3>🍎 Apple</h3>
-            <p>₹120</p>
-            <a href="/add/Apple"><button class="add-btn">Add</button></a>
-        </div>
-    </div>
-
-    <h2>Total: ₹{{ total }}</h2>
-
-    <h3>🛒 Cart:</h3>
-    <ul>
-        {% for item in cart %}
-        <li>
-            {{ item }}
-            <a href="/remove/{{ item }}">
-                <button class="remove-btn">Remove</button>
-            </a>
-        </li>
-        {% endfor %}
-    </ul>
-
-{% endif %}
+<ul style="list-style:none;">
+    <li>🍅 Tomato - <a href="/add_to_cart/Tomato">Add</a></li><br>
+    <li>🥔 Potato - <a href="/add_to_cart/Potato">Add</a></li><br>
+    <li>🧅 Onion - <a href="/add_to_cart/Onion">Add</a></li>
+</ul>
 
 </body>
 </html>
