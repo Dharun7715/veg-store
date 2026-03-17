@@ -1,58 +1,36 @@
-from flask import Flask, render_template, request, redirect
+from flask import Flask, render_template, request, redirect, url_for
+import os
 
 app = Flask(__name__)
 
 cart = []
-logged_in = False
 
-products = {
-    "Tomato": 20,
-    "Potato": 30,
-    "Carrot": 40,
-    "Apple": 120
-}
+@app.route("/")
+def index():
+    return render_template("index.html")
 
-# Main page (Login + Shop)
-@app.route("/", methods=["GET", "POST"])
-def main():
-    global logged_in
-
+@app.route("/login", methods=["GET", "POST"])
+def login():
     if request.method == "POST":
-        user = request.form["username"]
-        pwd = request.form["password"]
+        return redirect(url_for("index"))
+    return render_template("login.html")
 
-        if user == "admin" and pwd == "1234":
-            logged_in = True
-
-    total = sum(products[item] for item in cart)
-    return render_template("index.html", logged_in=logged_in, cart=cart, total=total)
-
-# Add item → redirect to cart page
-@app.route("/add/<item>")
-def add(item):
+@app.route("/add_to_cart/<item>")
+def add_to_cart(item):
     cart.append(item)
-    return redirect("/cart")
+    return redirect(url_for("cart_page"))
 
-# Remove item
+@app.route("/cart")
+def cart_page():
+    return render_template("cart.html", cart=cart)
+
 @app.route("/remove/<item>")
 def remove(item):
     if item in cart:
         cart.remove(item)
-    return redirect("/cart")
+    return redirect(url_for("cart_page"))
 
-# Cart page
-@app.route("/cart")
-def cart_page():
-    total = sum(products[item] for item in cart)
-    return render_template("cart.html", cart=cart, total=total)
-
-# Logout
-@app.route("/logout")
-def logout():
-    global logged_in
-    logged_in = False
-    cart.clear()
-    return redirect("/")
-
+# 🔥 VERY IMPORTANT
 if __name__ == "__main__":
-    app.run(debug=True)
+    port = int(os.environ.get("PORT", 10000))
+    app.run(host="0.0.0.0", port=port)
