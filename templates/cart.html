@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Cart</title>
+    <style>
+        body {
+            font-family: Arial;
+            text-align: center;
+            background-color: #fff3e0;
+        }
+
+        .item {
+            background: white;
+            margin: 10px;
+            padding: 10px;
+            border-radius: 10px;
+        }
+
+        button {
+            background: red;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>🛒 Your Cart</h1>
+
+    {% for item in cart %}
+    <div class="item">
+        {{ item }}
+        <a href="/remove/{{ item }}">
+            <button>Remove</button>
+        </a>
+    </div>
+    {% endfor %}
+
+    <h2>Total: ₹{{ total }}</h2>
+
+    <br>
+    <a href="/"><button style="background:green;">Back to Shop</button></a>
+
+</body>
+</html>
