@@ -30,7 +30,7 @@ def remove(item):
         cart.remove(item)
     return redirect(url_for("cart_page"))
 
-# 🔥 VERY IMPORTANT
+# 🔥 Renderக்கு important
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 10000))
     app.run(host="0.0.0.0", port=port)
