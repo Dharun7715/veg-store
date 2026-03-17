@@ -6,7 +6,7 @@
         body {
             font-family: Arial;
             text-align: center;
-            background-color: #fff3e0;
+            background-color: #f0f3f0;
         }
 
         .item {
@@ -25,23 +25,25 @@
         }
     </style>
 </head>
+
 <body>
 
-    <h1>🛒 Your Cart</h1>
+<h1>🛒 Your Cart</h1>
 
-    {% for item in cart %}
-    <div class="item">
-        {{ item }}
-        <a href="/remove/{{ item }}">
-            <button>Remove</button>
-        </a>
-    </div>
-    {% endfor %}
+{% for item in cart %}
+<div class="item">
+    {{ item }}
+    <a href="/remove/{{ item }}">
+        <button>Remove</button>
+    </a>
+</div>
+{% endfor %}
 
-    <h2>Total: ₹{{ total }}</h2>
+<br>
 
-    <br>
-    <a href="/"><button style="background:green;">Back to Shop</button></a>
+<a href="/">
+    <button style="background:green;">Back to Shop</button>
+</a>
 
 </body>
 </html>
