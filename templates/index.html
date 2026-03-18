@@ -3,7 +3,7 @@
 <head>
     <title>Veg Store</title>
 </head>
-<body style="text-align:center; font-family:Arial;">
+<body>
 
 <h1>🥕 Veg Store</h1>
 
@@ -11,10 +11,13 @@
 
 <h3>Products</h3>
 
-<ul style="list-style:none;">
-    <li>🍅 Tomato - <a href="/add_to_cart/Tomato">Add</a></li><br>
-    <li>🥔 Potato - <a href="/add_to_cart/Potato">Add</a></li><br>
-    <li>🧅 Onion - <a href="/add_to_cart/Onion">Add</a></li>
+<ul>
+    {% for item, price in products.items() %}
+        <li>
+            {{ item }} - ₹{{ price }}
+            <a href="/add_to_cart/{{ item }}">Add</a>
+        </li>
+    {% endfor %}
 </ul>
 
 </body>
