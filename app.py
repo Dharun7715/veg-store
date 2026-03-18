@@ -1,18 +1,19 @@
 from flask import Flask, render_template, redirect, request
+import os
 
 app = Flask(__name__)
 
 # 🛒 cart storage
 cart = []
 
-# 🥦 products with price
+# 🥦 product prices
 products = {
     "Tomato": 20,
     "Potato": 30,
     "Onion": 25
 }
 
-# 🔐 LOGIN
+# 🔐 LOGIN PAGE
 @app.route('/', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
@@ -29,7 +30,8 @@ def home():
 # ➕ ADD TO CART
 @app.route('/add_to_cart/<item>')
 def add_to_cart(item):
-    cart.append(item)
+    if item in products:
+        cart.append(item)
     return redirect('/cart')
 
 
@@ -46,10 +48,12 @@ def remove(item):
 def show_cart():
     total = 0
     for item in cart:
-        total += products[item]
+        total += products.get(item, 0)
 
     return render_template('cart.html', cart=cart, total=total)
 
 
+# 🚀 IMPORTANT FOR RENDER (DON'T CHANGE)
 if __name__ == '__main__':
-    app.run(debug=True)
+    port = int(os.environ.get("PORT", 10000))
+    app.run(host="0.0.0.0", port=port)
