@@ -7,11 +7,16 @@
 
 <h1>🛒 Your Cart</h1>
 
-{% for item in cart %}
+{% for item, qty in cart.items() %}
     <div>
-        {{ item }}
+        {{ item }} × {{ qty }} = ₹{{ products[item] * qty }}
+
+        <a href="/add_to_cart/{{ item }}">
+            <button>+</button>
+        </a>
+
         <a href="/remove/{{ item }}">
-            <button>Remove</button>
+            <button>-</button>
         </a>
     </div>
 {% endfor %}
