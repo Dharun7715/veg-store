@@ -1,30 +1,33 @@
 from flask import Flask, render_template, redirect, request
+import os
 
 app = Flask(__name__)
 
-# cart as dictionary
+# 🛒 cart (dictionary for quantity)
 cart = {}
 
-# product prices
+# 🥦 products with price
 products = {
     "Tomato": 20,
     "Potato": 30,
     "Onion": 25
 }
 
-# LOGIN PAGE
+# 🔐 LOGIN PAGE
 @app.route('/', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
         return redirect('/home')
     return render_template('login.html')
 
-# HOME PAGE
+
+# 🏠 HOME PAGE
 @app.route('/home')
 def home():
     return render_template('index.html')
 
-# ADD TO CART
+
+# ➕ ADD TO CART
 @app.route('/add_to_cart/<item>')
 def add_to_cart(item):
     if item in products:
@@ -34,7 +37,8 @@ def add_to_cart(item):
             cart[item] = 1
     return redirect('/cart')
 
-# REMOVE ITEM
+
+# ➖ REMOVE ITEM
 @app.route('/remove/<item>')
 def remove(item):
     if item in cart:
@@ -43,7 +47,8 @@ def remove(item):
             del cart[item]
     return redirect('/cart')
 
-# CART PAGE
+
+# 🛒 CART PAGE
 @app.route('/cart')
 def show_cart():
     total = 0
@@ -51,5 +56,8 @@ def show_cart():
         total += products[item] * qty
     return render_template('cart.html', cart=cart, products=products, total=total)
 
+
+# 🚀 RUN FOR RENDER (IMPORTANT)
 if __name__ == "__main__":
-    app.run(debug=True)
+    port = int(os.environ.get("PORT", 10000))
+    app.run(host="0.0.0.0", port=port)
